@@ -49,8 +49,10 @@ const formSend = event => {
   if (input.value.trim() === '') {
     page = 1;
     ulGallery.innerHTML = '';
+    loadMoreBtn.style.display = 'none';
   } else {
     ulGallery.innerHTML = '';
+    loadMoreBtn.style.display = 'none';
     page = 1;
     fetchRequest();
   }
