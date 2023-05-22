@@ -25,7 +25,7 @@ function fetchRequest() {
       }
       if (galleryItems.totalHits < page * per_page) {
         Notiflix.Notify.failure(
-          `We're sorry, but you've reached the end of search results.${galleryItems.totalHits}`
+          `We're sorry, but you've reached the end of search results.`
         );
         loadMoreBtn.style.display = 'none';
       }
