@@ -1,7 +1,7 @@
 import './css/styles.css';
 import Notiflix from 'notiflix';
-import httpRequest from './httpRequest';
-import insertHtmlImg from './renderGallery';
+import httpRequest from './httpRequest.js';
+import insertHtmlImg from './renderGallery.js';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { throttle, debounce } from 'lodash';
