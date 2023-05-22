@@ -23,9 +23,9 @@ function fetchRequest() {
       if (page > 1) {
         loadMoreBtn.style.display = 'block';
       }
-      if (galleryItems.totalHits < page * per_page) {
+      if (galleryItems.totalHits <= 0) {
         Notiflix.Notify.failure(
-          `We're sorry, but you've reached the end of search results.`
+          `Sorry, there are no images matching your search query. Please try again.`
         );
         loadMoreBtn.style.display = 'none';
       }
@@ -35,9 +35,7 @@ function fetchRequest() {
     .catch(error => {
       if ((error.name = '404 Not found')) {
         ulGallery.innerHTML = '';
-        Notiflix.Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
+        Notiflix.Notify.failure('404 Not found');
       } else {
         console.log(error);
       }
