@@ -1,11 +1,10 @@
-export default function insertHtmlImg(galleryItems) {
-  textHtml = galleryItems.hits
+export default function insertHtmlImg(hits) {
+  textHtml = hits
     .map(
       item => `
-      <li class="photo-card">
-      <div gallery__item>
-            <a class="gallery__link" href=${item.largeImageURL}>
-            <img class="gallery__image" src="${item.webformatURL}" alt="${item.tags}" loading="lazy" />
+      <a class="gallery__item" href=${item.largeImageURL}>
+      <div class="photo-card">
+            <img  src="${item.webformatURL}" alt="${item.tags}" loading="lazy" />
             <div class="info">
               <p class="info-item">
                 <b>Likes:</b> ${item.likes}
@@ -20,9 +19,9 @@ export default function insertHtmlImg(galleryItems) {
                 <b>Downloads:</b> ${item.downloads}
               </p>
             </div>
-            </a>            
           </div>
-          </li>`
+          </a>            
+          `
     )
     .join('\n');
   return textHtml;
