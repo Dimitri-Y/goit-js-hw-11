@@ -126,7 +126,7 @@ function onClickOpenLightbox(e) {
 
 function smoothScroll() {
   const { height: cardHeight } =
-    refs.gallery.firstElementChild.getBoundingClientRect();
+    ulGallery.firstElementChild.getBoundingClientRect();
 
   window.scrollBy({
     top: cardHeight * 2,
