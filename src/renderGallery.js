@@ -1,5 +1,5 @@
 export default function insertHtmlImg(hits) {
-  textHtml = hits
+  const textHtml = hits
     .map(
       item => `
       <a class="gallery__item" href=${item.largeImageURL}>
