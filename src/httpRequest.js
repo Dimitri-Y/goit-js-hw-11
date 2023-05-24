@@ -8,7 +8,7 @@ export default class NewApiImages {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-    this.per_page = 20;
+    this.per_page = 40;
   }
   async fetchImages() {
     const paramSearch = new URLSearchParams({

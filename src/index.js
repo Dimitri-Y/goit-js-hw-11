@@ -99,7 +99,11 @@ function onLoadMore() {
       ulGallery.insertAdjacentHTML('beforeend', textHtml);
       smoothScroll();
     })
-    .then(() => {
+    .then((totalHits, per_page) => {
+      if (totalHits < per_page)
+        Notiflix.Notify.failure(
+          "We're sorry, but you've reached the end of search results."
+        );
       loadMoreBtn.disabled = false;
       loadMoreBtn.textContent = 'Load more';
     })
@@ -108,11 +112,13 @@ function onLoadMore() {
       Notiflix.Notify.failure(
         "We're sorry, but you've reached the end of search results."
       );
+      loadMoreBtn.disabled = false;
     });
 }
 const loadMoreBtnHandle = event => {
   onLoadMore();
 };
+let lightbox;
 function onClickOpenLightbox(e) {
   e.preventDefault();
   if (e.target.nodeName !== 'IMG') {
@@ -120,8 +126,10 @@ function onClickOpenLightbox(e) {
   }
   const options = {
     captionDelay: 250,
+    captionsData: 'alt',
   };
-  new SimpleLightbox('.gallery__item', options);
+  lightbox = new SimpleLightbox('.gallery__item', options);
+  lightbox.refresh();
 }
 
 function smoothScroll() {
