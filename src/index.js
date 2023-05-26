@@ -88,9 +88,11 @@ function onLoadMore() {
   newApiImage
     .fetchImages()
     .then(({ hits }) => {
-      if (hits.length === 0) {
+      if (hits.length === 0 || hits.length < newApiImage.per_page) {
+        Notiflix.Notify.failure(
+          "We're sorry, but you've reached the end of search results."
+        );
         loadMoreBtn.style.display = 'none';
-        throw new Error();
       }
       return hits;
     })
@@ -99,20 +101,8 @@ function onLoadMore() {
       ulGallery.insertAdjacentHTML('beforeend', textHtml);
       smoothScroll();
     })
-    .then((totalHits, per_page) => {
-      if (totalHits < per_page)
-        Notiflix.Notify.failure(
-          "We're sorry, but you've reached the end of search results."
-        );
-      loadMoreBtn.disabled = false;
-      loadMoreBtn.textContent = 'Load more';
-    })
     .catch(error => {
       console.log(error);
-      Notiflix.Notify.failure(
-        "We're sorry, but you've reached the end of search results."
-      );
-      loadMoreBtn.disabled = false;
     });
 }
 const loadMoreBtnHandle = event => {
