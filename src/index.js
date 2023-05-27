@@ -37,6 +37,12 @@ const newApiImage = new NewApiImages();
 //       }
 //     });
 // }
+
+let lightbox = new SimpleLightbox('.gallery__item', {
+  captionDelay: 250,
+  captionsData: 'alt',
+});
+
 function fetchRequest() {
   newApiImage.searchQuery = input.value;
   newApiImage.resetPage();
@@ -56,6 +62,7 @@ function fetchRequest() {
       ulGallery.innerHTML = '';
       const textHtml = insertHtmlImg(hits);
       ulGallery.insertAdjacentHTML('beforeend', textHtml);
+      lightbox.refresh();
       if (hits.length < newApiImage.per_page) {
         loadMoreBtn.style.display = 'none';
       } else {
@@ -100,6 +107,7 @@ function onLoadMore() {
       const textHtml = insertHtmlImg(hits);
       ulGallery.insertAdjacentHTML('beforeend', textHtml);
       smoothScroll();
+      lightbox.refresh();
     })
     .catch(error => {
       console.log(error);
@@ -108,19 +116,6 @@ function onLoadMore() {
 const loadMoreBtnHandle = event => {
   onLoadMore();
 };
-let lightbox;
-function onClickOpenLightbox(e) {
-  e.preventDefault();
-  if (e.target.nodeName !== 'IMG') {
-    return;
-  }
-  const options = {
-    captionDelay: 250,
-    captionsData: 'alt',
-  };
-  lightbox = new SimpleLightbox('.gallery__item', options);
-  lightbox.refresh();
-}
 
 function smoothScroll() {
   const { height: cardHeight } =
@@ -134,7 +129,7 @@ function smoothScroll() {
 
 form.addEventListener('submit', formSend);
 loadMoreBtn.addEventListener('click', loadMoreBtnHandle);
-ulGallery.addEventListener('click', onClickOpenLightbox);
+// ulGallery.addEventListener('click', onClickOpenLightbox);
 // window.addEventListener(
 //   'scroll',
 //   debounce(() => {
