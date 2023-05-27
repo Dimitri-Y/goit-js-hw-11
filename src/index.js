@@ -94,8 +94,12 @@ function onLoadMore() {
   onLoadMore.textContent = 'Loading...';
   newApiImage
     .fetchImages()
-    .then(({ hits }) => {
-      if (hits.length === 0 || hits.length < newApiImage.per_page) {
+    .then(({ hits, totalHits }) => {
+      if (
+        hits.length === 0 ||
+        hits.length < newApiImage.per_page ||
+        totalHits <= lightbox.elements.length + newApiImage.per_page
+      ) {
         Notiflix.Notify.failure(
           "We're sorry, but you've reached the end of search results."
         );
